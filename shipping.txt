@@ -1,0 +1,20 @@
+James Bond
+USA
+6000 1
+Kayu Rotan
+100
+Elon M.
+USA
+6000 3
+Bijih Nikel
+6000
+Ali A.
+Canada
+7000 2
+Kayu Jati
+120
+Elon M.
+USA
+6000 3
+Bijih Nikel
+8000

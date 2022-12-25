@@ -343,7 +343,23 @@ int sortDescTotalBerat(struct shipping ship[MAX_ENTRIES], int n){
 
 int sortAscQty(struct shipping ship[MAX_ENTRIES], int n){
 	//adinda
+
+	int i, j;
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (ship[j].qty > ship[j + 1].qty)
+			{
+				// Swap data data[j] dan data[j+1] jika diperlukan
+				struct shipping temp = ship[j];
+				ship[j] = ship[j + 1];
+				ship[j + 1] = temp;
+			}
+		}
+	}
 }
+
 
 
 	//adinda

@@ -317,8 +317,26 @@ int sortAscJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n){
 	//varrel
 }
 
-int sortDescJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n){
-	//varrel
+int sortDescJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n)
+{
+	int i;
+	int j;
+	for (i = 0; i < n - 1; i++)
+	{
+		// Find the maximum element in the unsorted array
+		int max_index = i;
+		for (j = i + 1; j < n; j++)
+		{
+			if (data[j].jumlah_terjual > data[max_index].jumlah_terjual)
+			{
+				max_index = j;
+			}
+		}
+		// Swap the maximum element with the first element of the unsorted array
+		struct data_penjualan temp = data[i];
+		data[i] = data[max_index];
+		data[max_index] = temp;
+	}
 }
 
 void searchNamaProdukTabel3(char namaProduk[255]){

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <stdbool.h>
+#include <stdlib.h>
 #define MAX_ENTRIES 30
 struct wh {
   char nama_produk[225];
@@ -31,7 +31,7 @@ struct data_penjualan {
 	int sell_price;
 	int jumlah_terjual;
 	int total_profit;
-	bool processed;
+	int processed;
 }data[MAX_ENTRIES];
 
 	int warehouseSize = 0;
@@ -50,8 +50,8 @@ int main(){
 	warehouse[7] = (struct wh){"Karet", 8, 2000, 1, 4000, 12000};
  	warehouse[8] = (struct wh){"Nikel", 9, 5000, 0.2, 3000, 9000};
 	warehouse[9] = (struct wh){"Serabut Kelapa", 10, 1000, 1, 5000, 11000};
-	warehouse[10] = (struct wh){"Minyak", 11, 100, 50, 27000, 50000};
-	warehouse[11] = (struct wh){"Mineral", 12, 500, 10, 17000, 30000};
+	warehouse[10] = (struct wh){"Minyak Bumi", 11, 100, 50, 450000, 900000};
+	warehouse[11] = (struct wh){"Mineral", 12, 500, 10, 170000, 300000};
 	warehouse[12] = (struct wh){"Kayu Jati", 13, 100, 2, 38000, 70000};
 	warehouse[13] = (struct wh){"Kayu Rotan", 14, 1000, 5, 12000, 20000};
 	warehouse[14] = (struct wh){"Biji Kopi", 15, 2000, 1, 3000, 10000};
@@ -65,7 +65,7 @@ int main(){
 	ship[7] = (struct shipping){"Ashley Johnson", "Russia", 8000, 8, "Karet", 1005, 0, 0};
 	ship[8] = (struct shipping){"Daniel Thompson", "Spain", 7000, 9, "Nikel", 1250, 0, 0, 0};
 	ship[9] = (struct shipping){"Sarah Smith", "Brazil", 8000, 10, "Serabut Kelapa", 433, 0, 0, 0};
-	ship[10] = (struct shipping){"Jason Davis", "Australia", 10000, 11, "Minyak", 33, 0, 0, 0};
+	ship[10] = (struct shipping){"Jason Davis", "Australia", 10000, 11, "Minyak Bumi", 30, 0, 0, 0};
 	ship[11] = (struct shipping){"Laura Williams", "South Africa", 9000, 12, "Mineral", 50, 0, 0, 0};
 	ship[12] = (struct shipping){"Michael Thompson", "Mexico", 7000, 13, "Kayu Jati", 30, 0, 0, 0};
 	ship[13] = (struct shipping){"Emily Johnson", "Canada", 8000, 14, "Kayu Rotan", 200, 0, 0, 0};
@@ -87,7 +87,7 @@ int main(){
 	printf("\n1. Data warehouse\n2. Data Shipping\n3. Data Penjualan\n Input:");
 	scanf("%d", &pil);		
 	if (pil == 1){
-		updatePenjualan(warehouse, ship, data, penjualanSize);
+		
 		int i, j;
 		printWarehouse(warehouse,warehouseSize);
 		int pil1_2;
@@ -115,7 +115,7 @@ int main(){
 		}
 	} 
 	else if (pil == 2){
-		updatePenjualan(warehouse, ship, data, penjualanSize);
+		
 		int i, j;
     		for (i = 0; i < shippingSize; i++){
     		//update berat dan stok
@@ -144,50 +144,95 @@ int main(){
 		} else if (pil2_2 == 2){
 			sortAscIDTabel2(ship, shippingSize);
 			printShipping(ship, shippingSize);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil2_2 == 3){
 			sortAscTotalBerat(ship, shippingSize);
 			printShipping(ship, shippingSize);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil2_2 == 4){
 			sortDescTotalBerat(ship, shippingSize);
 			printShipping(ship, shippingSize);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil2_2 == 5){
 			sortAscQty(ship, shippingSize);
 			printShipping(ship, shippingSize); 
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil2_2 == 6){
 			char namaPembeli[255];
 			printf("Masukkan Nama Pembeli: ");
 			scanf(" %[^\n]", &namaPembeli);
 			sequentialSearchNamaPembeli(namaPembeli);
+			mainmenu_or_exit();
+			system("cls");
 		}
 	
 }
 
 	else if (pil == 3){
 		updatePenjualan(warehouse, ship, data, penjualanSize);
+		updatePenjualan(warehouse, ship, data, penjualanSize);
 		printPenjualan(data, penjualanSize);
-		printf("1. Sort berdasarkan keuntungan terkecil\n2.Sort berdasarkan keuntungan tertinggi\n3. Sort berdasarkan jumlah terjual terendah\n4. Sort berdasarkan jumlah penjualan tertinggi\n5. Search Nama Produk\nMasukkan Input: ");
+		
+		printf("1. Sort berdasarkan keuntungan terkecil\n2. Sort berdasarkan keuntungan tertinggi\n3. Sort berdasarkan jumlah terjual terendah\n4. Sort berdasarkan jumlah penjualan tertinggi\n5. Search Nama Produk\nMasukkan Input: ");
 		int pil3_2;
 		scanf("%d", &pil3_2);
 	 if (pil3_2 == 1){
 	 	sortAscProfit(data, penjualanSize);
 	 	printPenjualan(data, penjualanSize);
+	 	mainmenu_or_exit();
+		system("cls");
 	} else if (pil3_2 == 2){
 		sortDescProfit(data, penjualanSize);
 		printPenjualan(data, penjualanSize);
+		mainmenu_or_exit();
+		system("cls");
 	} else if (pil3_2 == 3){
 		sortAscJumlahTerjual(data, penjualanSize);
 		printPenjualan(data, penjualanSize);
+		mainmenu_or_exit();
+		system("cls");
 	} else if (pil3_2 == 4){
 		sortDescJumlahTerjual(data, penjualanSize);
 		printPenjualan(data, penjualanSize);
+		mainmenu_or_exit();
+		system("cls");
 	} else if (pil3_2 == 5){
 		char namaProduk[255];
 		printf("Masukkan Nama Produk: ");
 		scanf(" %[^\n]", &namaProduk);
 		searchNamaProdukTabel3(namaProduk);
+		mainmenu_or_exit();
+		system("cls");
 	}
    }
   }
+}
+
+int mainmenu_or_exit(){
+    int choice;
+
+    printf("\nKetik 1 untuk kembali ke menu\nKetik 0 untuk keluar program\nInput:  ");
+    scanf("%d", &choice);
+
+    if (choice == 1)
+    {
+        // Return to the main menu
+    }
+    else if (choice == 0)
+    {
+        // Exit the program
+        printf("Exiting...\n");
+        exit(0);
+    }
+    else
+    {
+        printf("Invalid choice. Please try again.\n");
+        mainmenu_or_exit();
+    }
 }
 
 int printWarehouse(struct wh warehouse[MAX_ENTRIES], int n){
@@ -284,12 +329,6 @@ int updatePenjualan(struct wh warehouse[MAX_ENTRIES], struct shipping ship[MAX_E
   		int sell = data[i].sell_price;
   		int buy = data[i].base_price;
         data[i].total_profit = jumlah * (sell - buy);
-        jumlah = data[2].jumlah_terjual;
-  		sell = data[2].sell_price;
-        data[2].total_profit = jumlah * (sell - buy);
-        jumlah = data[3].jumlah_terjual;
-  		sell = data[3].sell_price;
-        data[3].total_profit = jumlah * (sell - buy);
         data[i].processed = 1;
   }
 }
@@ -334,7 +373,7 @@ int sortDescProfit(struct data_penjualan data[MAX_ENTRIES], int n)
 		{
 			if (data[j].total_profit < data[j + 1].total_profit)
 			{
-				// Swap data data[j] dan data[j+1] jika diperlukan
+				// Swap data data[j] and data[j+1] if needed
 				struct data_penjualan temp = data[j];
 				data[j] = data[j + 1];
 				data[j + 1] = temp;
@@ -387,7 +426,7 @@ int sortDescJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n)
 }
 
 //varrel
-void searchNamaProdukTabel3(char namaProduk[255]){
+int searchNamaProdukTabel3(char namaProduk[255]){
 	//sequential search
 	int i;
 	int found = 0;

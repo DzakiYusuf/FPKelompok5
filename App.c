@@ -268,8 +268,28 @@ int binarySearchIDProduk(int id){
 	//dzaki	
 }
 
+
 int searchWarehouseNama(char *namaProduk){
 	//adinda
+	//sequential search
+	int i;
+	int found = 0;
+    for (i = 0; i < warehouseSize; i++) {
+	    //compare nama_pembeli yang dicari dengan setiap data ship[i].nama_pembeli, cari hingga ada yang sama ( == 0)
+        if (strcmp(warehouse[i].nama_produk , namaProduk) == 0) {
+            printf("Data nama produk %s ditemukan pada index %d: \n", namaProduk, i);
+			printf("Nama Produk: %s\n", warehouse[i].nama_produk);
+			printf("ID Produk: %d\n", warehouse[i].id_produk);
+			printf("Stok: %d\n", warehouse[i].stok);
+			printf("Berat: %.2f\n", warehouse[i].berat);
+			printf("Harga Dasar: %d\n", warehouse[i].base_price);
+			printf("Harga Jual: %d\n", warehouse[i].sell_price);
+				
+			found = 1;
+        }
+     } if (found == 0) {
+		printf("Produk dengan nama %s tidak ditemukan.\n", namaProduk);
+	}
 }
 
 int printShipping(struct shipping ship[MAX_ENTRIES], int n) {

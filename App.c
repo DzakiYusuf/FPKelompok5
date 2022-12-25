@@ -312,9 +312,22 @@ int sortAscTotalBerat(struct shipping ship[MAX_ENTRIES], int n){
 	//mutiara
 }
 
-int sortDescTotalBerat(struct shipping ship[MAX_ENTRIES], int n){
+
 	//adinda
+int sortDescTotalBerat(struct shipping ship[MAX_ENTRIES], int n){
+	//insertion sort
+	int i;
+    for (i = 1; i < n; i++) {
+    struct shipping temp = ship[i];
+    int j = i - 1;
+    while (j >= 0 && ship[j].total_berat < temp.total_berat) {
+      ship[j+1] = ship[j];
+      j--;
+    }
+    ship[j+1] = temp;
+  }
 }
+
 
 int sortAscQty(struct shipping ship[MAX_ENTRIES], int n){
 	//adinda

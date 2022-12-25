@@ -69,7 +69,8 @@ void mainmenu_or_exit(){
     }
 }
 
-void sortAscBerat(){    //dodek
+//dodek
+void sortAscBerat(){   
     int n = warehouseSize;
     for(int i=1; i<n; i++){ 
     wh temp = warehouse[i];   
@@ -82,8 +83,8 @@ void sortAscBerat(){    //dodek
    }
 }
 
-
-void sortDescBerat(){	  //dodek
+//dodek
+void sortDescBerat(){	
     int n = warehouseSize;
     for(int i=1; i<n; i++){ 
     wh temp = warehouse[i];   

@@ -40,5 +40,10 @@ struct data_penjualan
 	int penjualanSize = 0;
 	
 int main(){
-	
+	mainmenu:
+	//while(1) untuk infinite loop ke menu
+	while(1){
+	int pil;
+	printf("\n1. Data warehouse\n2. Data Shipping\n3. Data Penjualan\n Input:");
+	scanf("%d", &pil);
 }

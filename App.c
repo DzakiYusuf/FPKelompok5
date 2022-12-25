@@ -305,18 +305,65 @@ int printPenjualan(struct data_penjualan data[MAX_ENTRIES], int size) {
   }
 }
 
-int sortAscProfit(struct data_penjualan data[MAX_ENTRIES], int n){
-	//varrel
+//varrel
+int sortAscProfit(struct data_penjualan data[MAX_ENTRIES], int n)
+{
+	int i, j;
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (data[j].total_profit > data[j + 1].total_profit)
+			{
+				// Swap data data[j] dan data[j+1] jika diperlukan
+				struct data_penjualan temp = data[j];
+				data[j] = data[j + 1];
+				data[j + 1] = temp;
+			}
+		}
+	}
 }
 
-int sortDescProfit(struct data_penjualan data[MAX_ENTRIES], int n){
-	//varrel
+//varrel
+int sortDescProfit(struct data_penjualan data[MAX_ENTRIES], int n)
+{
+	int i, j;
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (data[j].total_profit < data[j + 1].total_profit)
+			{
+				// Swap data data[j] dan data[j+1] jika diperlukan
+				struct data_penjualan temp = data[j];
+				data[j] = data[j + 1];
+				data[j + 1] = temp;
+			}
+		}
+	}
 }
 
-int sortAscJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n){
-	//varrel
+//varrel
+// Fungsi untuk mengurutkan data penjualan berdasarkan jumlah produk yang terjual (ascending)
+int sortAscJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n)
+{
+	int i, j;
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (data[j].jumlah_terjual > data[j + 1].jumlah_terjual)
+			{
+				// Swap data data[j] dan data[j+1] jika diperlukan
+				struct data_penjualan temp = data[j];
+				data[j] = data[j + 1];
+				data[j + 1] = temp;
+			}
+		}
+	}
 }
 
+//varrel
 int sortDescJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n)
 {
 	int i;
@@ -339,6 +386,7 @@ int sortDescJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n)
 	}
 }
 
+//varrel
 void searchNamaProdukTabel3(char namaProduk[255]){
 	//sequential search
 	int i;

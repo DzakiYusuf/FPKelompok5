@@ -321,6 +321,23 @@ int sortDescJumlahTerjual(struct data_penjualan data[MAX_ENTRIES], int n){
 	//varrel
 }
 
-void searchNamaProdukTabel3(char namaProduk){
-	//varrel
+void searchNamaProdukTabel3(char namaProduk[255]){
+	//sequential search
+	int i;
+	int found = 0;
+    for (i = 0; i < penjualanSize; i++) {
+	    //compare nama_pembeli yang dicari dengan setiap data ship[i].nama_pembeli, cari hingga ada yang sama ( == 0)
+        if (strcmp(data[i].nama_produk, namaProduk) == 0) {
+            printf("Data Penjualan Nama Produk %s ditemukan pada index %d: \n", namaProduk, i);
+			printf("Id produk: %d\n", data[i].id_produk);
+			printf("Nama produk: %s\n", data[i].nama_produk);
+			printf("Harga Beli: %d\n", data[i].base_price);
+			printf("Harga Jual: %d\n", data[i].sell_price);
+			printf("Total Terjual: %d\n", data[i].jumlah_terjual);
+			printf("Total Keuntungan: %d\n", data[i].total_profit);
+			found = 1;
+        }
+     } if (found == 0) {
+		printf("penjualan data atas nama %s tidak ditemukan.\n", namaProduk);
+	}
 }

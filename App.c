@@ -345,9 +345,31 @@ int sortAscQty(struct shipping ship[MAX_ENTRIES], int n){
 	//adinda
 }
 
-int sequentialSearchNamaPembeli(char nama_pembeli[255]) {
+
 	//adinda
+int sequentialSearchNamaPembeli(char nama_pembeli[255]) {
+	//sequential search
+	int i;
+	int found = 0;
+    for (i = 0; i < shippingSize; i++) {
+	    //compare nama_pembeli yang dicari dengan setiap data ship[i].nama_pembeli, cari hingga ada yang sama ( == 0)
+        if (strcmp(ship[i].nama_pembeli, nama_pembeli) == 0) {
+            printf("Shipping data untuk %s ditemukan pada index %d: \n", nama_pembeli, i);
+			printf("Nama Pembeli: %s\n", ship[i].nama_pembeli);
+			printf("Negara: %s\n", ship[i].negara);
+			printf("Jarak: %.2f\n", ship[i].jarak);
+			printf("ID Produk: %d\n", ship[i].id_produk);
+			printf("Nama Produk: %s\n", ship[i].nama_produk);
+			printf("Quantity: %d\n", ship[i].qty);
+			printf("Berat Total: %.2f\n", ship[i].total_berat);
+			printf("Biaya Kirim: %d\n", ship[i].ongkir);
+			found = 1;
+        }
+     } if (found == 0) {
+		printf("Shipping data atas nama %s tidak ditemukan.\n", nama_pembeli);
+	}
 }
+
 
 int updatePenjualan(struct wh warehouse[MAX_ENTRIES], struct shipping ship[MAX_ENTRIES], struct data_penjualan data[MAX_ENTRIES], int s){
 

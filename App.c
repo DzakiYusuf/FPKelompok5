@@ -98,17 +98,30 @@ int main(){
 		} else if (pil1_2 == 2){
 			sortAscBerat(warehouse,warehouseSize);
 			printWarehouse(warehouse,warehouseSize);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil1_2 == 3){
 			sortDescBerat(warehouse,warehouseSize);
 			printWarehouse(warehouse,warehouseSize);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil1_2 == 4){
 			sortAscStok(warehouse,warehouseSize);
 			printWarehouse(warehouse,warehouseSize);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil1_2 == 5){
 			sortDescStok(warehouse,warehouseSize);
 			printWarehouse(warehouse,warehouseSize);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil1_2 == 6){
-			searchWarehouseNama(warehouse, warehouseSize);
+			char namaProduk[255];
+			printf("Masukkan Nama Produk: ");
+			scanf(" %[^\n]", &namaProduk);
+			searchWarehouseNama(namaProduk);
+			mainmenu_or_exit();
+			system("cls");
 		} else if (pil1_2 == 7){
 			goto mainmenu;
 			break;
@@ -269,7 +282,7 @@ int binarySearchIDProduk(int id){
 }
 
 
-int searchWarehouseNama(char *namaProduk){
+int searchWarehouseNama(char namaProduk[255]){
 	//adinda
 	//sequential search
 	int i;
@@ -281,10 +294,9 @@ int searchWarehouseNama(char *namaProduk){
 			printf("Nama Produk: %s\n", warehouse[i].nama_produk);
 			printf("ID Produk: %d\n", warehouse[i].id_produk);
 			printf("Stok: %d\n", warehouse[i].stok);
-			printf("Berat: %.2f\n", warehouse[i].berat);
-			printf("Harga Dasar: %d\n", warehouse[i].base_price);
-			printf("Harga Jual: %d\n", warehouse[i].sell_price);
-				
+			printf("Berat: %.2fkg\n", warehouse[i].berat);
+			printf("Harga Beli: Rp.%d\n", warehouse[i].base_price);
+			printf("Harga Jual: Rp.%d\n", warehouse[i].sell_price);
 			found = 1;
         }
      } if (found == 0) {

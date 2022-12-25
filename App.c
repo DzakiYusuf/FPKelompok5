@@ -72,8 +72,9 @@ void mainmenu_or_exit(){
 //dodek
 void sortAscBerat(){   
     int n = warehouseSize;
-    for(int i=1; i<n; i++){ 
-    wh temp = warehouse[i];   
+    int i;
+    for(i=1; i<n; i++){ 
+    struct wh temp = warehouse[i];   
     int j = i-1;
 	while(warehouse[j].berat > temp.berat && j>=0){
         warehouse[j+1] = warehouse[j];  
@@ -85,9 +86,10 @@ void sortAscBerat(){
 
 //dodek
 void sortDescBerat(){	
+	int i;
     int n = warehouseSize;
-    for(int i=1; i<n; i++){ 
-    wh temp = warehouse[i];   
+    for(i=1; i<n; i++){ 
+    struct wh temp = warehouse[i];   
     int j = i-1;
         while(warehouse[j].berat < temp.berat && j>=0){
         warehouse[j+1] = warehouse[j];  
@@ -99,8 +101,9 @@ void sortDescBerat(){
 
 void sortAscStok(){	//mutiara
 	int n = warehouseSize;
-    	for(int z=1; z<n; z++){ 
-        	wh temp = warehouse[z];   
+	int z;
+    	for(z=1; z<n; z++){ 
+        	struct wh temp = warehouse[z];   
         	int j = z-1;
         	while(warehouse[j].stok > temp.stok && j>=0){
             		warehouse[j+1] = warehouse[j];  
@@ -112,8 +115,9 @@ void sortAscStok(){	//mutiara
 
 void sortDescStok(){   //mutiara	
     int n = warehouseSize;
-    for(int z=1; z<n; z++){ 
-	    wh temp = warehouse[z];   
+    int z;
+    for(z=1; z<n; z++){ 
+	    struct wh temp = warehouse[z];   
 	    int j = z-1;
             while(warehouse[j].stok < temp.stok && j>=0){
             	warehouse[j+1] = warehouse[j];  
@@ -171,8 +175,9 @@ void printShipping() {
 
 void sortAscIDTabel2(){   //mutiara
 	int n = shippingSize;
-    	for(int z=1; z<n; z++){ 
-        	shipping temp = ship[z];   
+    	int z;
+		for(z=1; z<n; z++){ 
+        	struct shipping temp = ship[z];   
         	int j = z-1;
         	while(ship[j].id_produk > temp.id_produk && j>=0){
            		ship[j+1] = ship[j];  
@@ -184,9 +189,10 @@ void sortAscIDTabel2(){   //mutiara
 }
 
 void sortAscTotalBerat(){ //mutiara
+	int z;
 	int n = shippingSize;
-    	for(int z=1; z<n; z++){ 
-        shipping temporary = ship[z];   
+    	for(z=1; z<n; z++){ 
+        struct shipping temporary = ship[z];   
         int j = z-1;
         while(ship[j].total_berat > temporary.total_berat && j>=0){
             ship[j+1] = ship[j];  
@@ -545,7 +551,7 @@ int main(){
 		int i, j;
 		printWarehouse();
 		int menu;
-		printf("[1]Search data menggunakan ID produk\n[2]Sort dari produk paling ringan\n[3]Sort dari produk paling berat\n[4]Sort dari jumlah stok terbanyak\n[5]Sort dari jumlah stok paling sedikit\n[6]Search Nama Produk\n[7]Kembali\nMasukkan Input: ");
+		printf("[1]Search data menggunakan ID produk\n[2]Sort dari produk paling ringan\n[3]Sort dari produk paling berat\n[4]Sort dari jumlah stok paling sedikit\n[5]Sort dari jumlah stok terbanyak\n[6]Search Nama Produk\n[7]Kembali\nMasukkan Input: ");
 			scanf("%d", &menu);
 			switch (menu)
 			{

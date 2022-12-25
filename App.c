@@ -77,12 +77,30 @@ void sortDescBerat(){
 	//dodek
 }
 
-void sortAscStok(){
-	//mutiara
+void sortAscStok(){	//mutiara
+	int n = warehouseSize;
+    for(int z=1; z<n; z++){ 
+        wh temp = warehouse[z];   
+        int j = z-1;
+        while(warehouse[j].stok > temp.stok && j>=0){
+            warehouse[j+1] = warehouse[j];  
+            j--; 
+        }
+        warehouse[j+1]=temp;
+   	}
 }
 
-void sortDescStok(){
-	//mutiara	
+void sortDescStok(){ //mutiara	
+    int n = warehouseSize;
+    for(int z=1; z<n; z++){ 
+        wh temp = warehouse[z];   
+        int j = z-1;
+        while(warehouse[j].stok < temp.stok && j>=0){
+            warehouse[j+1] = warehouse[j];  
+            j--; 
+        }
+        warehouse[j+1]=temp;
+   	}
 }
 
 void sortAscID(){
@@ -135,10 +153,18 @@ void sortAscIDTabel2(){
 	//mutiara
 }
 
-void sortAscTotalBerat(){
-	//mutiara
+void sortAscTotalBerat(){ //mutiara
+	int n = shippingSize;
+    for(int z=1; z<n; z++){ 
+        shipping temporary = ship[z];   
+        int j = z-1;
+        while(ship[j].total_berat > temporary.total_berat && j>=0){
+            ship[j+1] = ship[j];  
+            j--; 
+        }
+        ship[j+1] = temporary;
+   	}
 }
-
 
 	//adinda
 void sortDescTotalBerat(){

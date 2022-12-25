@@ -69,12 +69,31 @@ void mainmenu_or_exit(){
     }
 }
 
-void sortAscBerat(){
-	//dodek
+void sortAscBerat(){    //dodek
+    int n = warehouseSize;
+    for(int i=1; i<n; i++){ 
+    wh temp = warehouse[i];   
+    int j = i-1;
+	while(warehouse[j].berat > temp.berat && j>=0){
+        warehouse[j+1] = warehouse[j];  
+        j--; 
+    }
+        warehouse[j+1]=temp;
+   }
 }
 
-void sortDescBerat(){
-	//dodek
+
+void sortDescBerat(){	  //dodek
+    int n = warehouseSize;
+    for(int i=1; i<n; i++){ 
+    wh temp = warehouse[i];   
+    int j = i-1;
+        while(warehouse[j].berat < temp.berat && j>=0){
+        warehouse[j+1] = warehouse[j];  
+        j--; 
+    }
+        warehouse[j+1]=temp;
+    }
 }
 
 void sortAscStok(){	//mutiara

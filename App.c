@@ -40,7 +40,40 @@ struct data_penjualan
 	int penjualanSize = 0;
 	
 int main(){
-	
+	//import data kedalam struct wh & ship
+	warehouse[0] = (struct wh){"Minyak kelapa sawit", 1, 1000, 1, 7000, 12000};
+	warehouse[1] = (struct wh){"Minyak kelapa", 2, 500, 0.5, 6000, 10000};
+	warehouse[2] = (struct wh){"Rempah-rempah", 3, 2000, 0.25, 5000, 9000};
+	warehouse[3] = (struct wh){"Perabotan", 4, 100, 50, 23000, 50000};
+	warehouse[4] = (struct wh){"Tekstil", 5, 500, 10, 10000, 25000};
+	warehouse[5] = (struct wh){"Elektronik", 6, 100, 2, 27000, 60000};
+	warehouse[6] = (struct wh){"Kayu Mahoni", 7, 1000, 5, 9000, 20000};
+	warehouse[7] = (struct wh){"Karet", 8, 2000, 1, 4000, 12000};
+ 	warehouse[8] = (struct wh){"Nikel", 9, 5000, 0.2, 3000, 9000};
+	warehouse[9] = (struct wh){"Serabut Kelapa", 10, 1000, 1, 5000, 11000};
+	warehouse[10] = (struct wh){"Minyak", 11, 100, 50, 27000, 50000};
+	warehouse[11] = (struct wh){"Mineral", 12, 500, 10, 17000, 30000};
+	warehouse[12] = (struct wh){"Kayu Jati", 13, 100, 2, 38000, 70000};
+	warehouse[13] = (struct wh){"Kayu Rotan", 14, 1000, 5, 12000, 20000};
+	warehouse[14] = (struct wh){"Biji Kopi", 15, 2000, 1, 3000, 10000};
+	ship[0] = (struct shipping){"John Smith", "United States", 5000, 1, "Minyak kelapa sawit", 100, 0, 0, 0};
+	ship[1] = (struct shipping){"Jane Doe", "China", 8000, 2, "Minyak kelapa", 50, 0, 0, 0};
+	ship[2] = (struct shipping){"Robert Johnson", "India", 4000, 7, "Kayu Mahoni", 127, 0, 0, 0};
+	ship[3] = (struct shipping){"Emily Williams", "Japan", 10000, 5, "Tekstil", 32, 0, 0, 0};
+	ship[4] = (struct shipping){"Michael Brown", "France", 6000, 4, "Perabotan", 60, 0, 0, 0};
+	ship[5] = (struct shipping){"Samantha Jones", "United Kingdom", 7000, 6, "Elektronik", 30, 0, 0, 0};
+	ship[6] = (struct shipping){"Christopher Davis", "Germany", 9000, 3, "Rempah-rempah", 362, 0, 0, 0};
+	ship[7] = (struct shipping){"Ashley Johnson", "Russia", 8000, 8, "Karet", 1005, 0, 0};
+	ship[8] = (struct shipping){"Daniel Thompson", "Spain", 7000, 9, "Nikel", 1250, 0, 0, 0};
+	ship[9] = (struct shipping){"Sarah Smith", "Brazil", 8000, 10, "Serabut Kelapa", 433, 0, 0, 0};
+	ship[10] = (struct shipping){"Jason Davis", "Australia", 10000, 11, "Minyak", 33, 0, 0, 0};
+	ship[11] = (struct shipping){"Laura Williams", "South Africa", 9000, 12, "Mineral", 50, 0, 0, 0};
+	ship[12] = (struct shipping){"Michael Thompson", "Mexico", 7000, 13, "Kayu Jati", 30, 0, 0, 0};
+	ship[13] = (struct shipping){"Emily Johnson", "Canada", 8000, 14, "Kayu Rotan", 200, 0, 0, 0};
+	ship[14] = (struct shipping){"John Davis", "Argentina", 9000, 15, "Biji Kopi", 1100, 0, 0, 0};
+	warehouseSize = 15;
+	shippingSize = 15;
+
 	mainmenu:
 	//while(1) untuk infinite loop ke menu
 	while(1){

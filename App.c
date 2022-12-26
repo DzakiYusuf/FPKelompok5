@@ -11,7 +11,8 @@ struct wh
 	float berat;
 	int base_price;
 	int sell_price;
-} warehouse[30];
+	char lokasi[225];
+} warehouse[15];
 
 struct shipping
 {
@@ -35,26 +36,22 @@ struct data_penjualan
 	int jumlah_terjual;
 	int total_profit;
 	int processed;
-} data[30];
+} data[15];
 
 int warehouseSize = 0;
 int shippingSize = 0;
 int penjualanSize = 0;
 
-void printWarehouse()
-{
+void printWarehouse(){
 	printf("\n");
-	printf("===================  Data Warehouse  ==================\n");
-	printf("|%-3s|    %-18s|   %-9s| %-6s|\n", "ID Produk", "Nama Produk", "Berat", "Qty");
+	printf("============================  Data Warehouse  =============================\n");
+	printf("|%-3s|    %-18s|   %-9s| %-6s| %-18s|\n", "ID Produk", "Nama Produk", "Berat", "Qty", "Lokasi Penyimpanan");
 	int i;
-	for (i = 0; i < warehouseSize; i++)
-	{
-		printf("|    %-5d|  %-20s|  %-7.2f kg| %-6d|\n", warehouse[i].id_produk, &warehouse[i].nama_produk, warehouse[i].berat, warehouse[i].stok);
-	}
-	printf("=======================================================\n");
+	for (i = 0; i < warehouseSize; i++) {
+		printf("|    %-5d|  %-20s|  %-7.2f kg| %-6d|     %-14s|\n", warehouse[i].id_produk, &warehouse[i].nama_produk, warehouse[i].berat, warehouse[i].stok, warehouse[i].lokasi);
+	}	printf("===========================================================================\n");
 }
 
-// dodek
 void sortAscBerat()
 {
 	int n = warehouseSize;
@@ -72,7 +69,6 @@ void sortAscBerat()
 	}
 }
 
-// dodek
 void sortDescBerat()
 {
 	int i;
@@ -91,7 +87,7 @@ void sortDescBerat()
 }
 
 void sortAscStok()
-{ // mutiara
+{
 	int n = warehouseSize;
 	int z;
 	for (z = 1; z < n; z++)
@@ -108,7 +104,7 @@ void sortAscStok()
 }
 
 void sortDescStok()
-{ // mutiara
+{
 	int n = warehouseSize;
 	int z;
 	for (z = 1; z < n; z++)
@@ -194,12 +190,11 @@ void updateStockWarehouse()
 		}
 	}
 	warehouse[i].stok = new_stok;
-	printf("Data berhasil diubah");
+	printf("Data berhasil diubah\n");
 }
 
 void searchWarehouseNama()
 {
-	// adinda
 	// sequential search
 	char namaProduk[255];
 	printf("Masukkan Nama Produk: ");
@@ -208,7 +203,6 @@ void searchWarehouseNama()
 	int found = 0;
 	for (i = 0; i < warehouseSize; i++)
 	{
-		// compare nama_pembeli yang dicari dengan setiap data ship[i].nama_pembeli, cari hingga ada yang sama ( == 0)
 		if (strcmp(warehouse[i].nama_produk, namaProduk) == 0)
 		{
 			printf("Data nama produk %s ditemukan pada index %d: \n", namaProduk, i);
@@ -218,6 +212,7 @@ void searchWarehouseNama()
 			printf("Berat: %.2fkg\n", warehouse[i].berat);
 			printf("Harga Beli: Rp.%d\n", warehouse[i].base_price);
 			printf("Harga Jual: Rp.%d\n", warehouse[i].sell_price);
+			printf("  Lokasi Penyimpanan: %s\n", warehouse[i].lokasi);
 			found = 1;
 		}
 	}
@@ -230,8 +225,7 @@ void searchWarehouseNama()
 void printShipping()
 {
 	int i;
-	if (strcmp(ship[i].nama_pembeli, "") != 0)
-	{
+	
 		printf("\n");
 		printf("=================================================  Data Shipping  ===================================================\n");
 		printf("| %-20s | %-15s | %-9s| %-2s | %-20s | %-6s| %-10s|%-16s|\n", "Nama Pembeli", "Negara", "Jarak", "ID", "Nama Produk", "Qty", "Berat", "Tarif Pengiriman");
@@ -240,11 +234,10 @@ void printShipping()
 			printf("| %-20s | %-15s | %-9.2f| %-2d | %-20s | %-6d| %-7.2f kg| Rp.%-12d|\n", &ship[i].nama_pembeli, &ship[i].negara, ship[i].jarak, ship[i].id_produk, &ship[i].nama_produk, ship[i].qty, ship[i].total_berat, ship[i].ongkir);
 		}
 		printf("=====================================================================================================================\n");
-	}
 }
 
 void sortAscIDTabel2()
-{ // mutiara
+{
 	int n = shippingSize;
 	int z;
 	for (z = 1; z < n; z++)
@@ -261,7 +254,7 @@ void sortAscIDTabel2()
 }
 
 void sortAscTotalBerat()
-{ // mutiara
+{
 	int z;
 	int n = shippingSize;
 	for (z = 1; z < n; z++)
@@ -277,7 +270,6 @@ void sortAscTotalBerat()
 	}
 }
 
-// adinda
 void sortDescTotalBerat()
 {
 	// insertion sort
@@ -319,26 +311,25 @@ void addShipping()
 				; // clear the input buffer
 		}
 
-		int found = 0; // flag to keep track of whether the id_produk was found or not
+		int found = 0; // 
 
 		while (found != 1)
-		{ // outer loop to repeat the process until the id_produk is found
+		{ // loop untuk mengulang proses hingga id_produk ditemukan
 			printf("ID Produk: ");
 			scanf("%d", &ship[i].id_produk);
 
-			// inner loop to check if the entered id_produk exists in the warehouse struct
+			// inner loop untuk cek kalau id_produk shipping baru ada pada warehouse
 			int j;
 			for (j = 0; j < warehouseSize; j++)
 			{
 				if (ship[i].id_produk == warehouse[j].id_produk)
 				{
-					found = 1; // id_produk was found
+					found = 1; // id_produk ditemukan
 					strcpy(ship[i].nama_produk, warehouse[j].nama_produk);
 					break;
 				}
 			}
 
-			// if the id_produk was not found, ask the user to enter a different id_produk
 			if (!found)
 			{
 				printf("ID produk tidak ditemukan. Silakan masukkan ID produk yang valid.\n");
@@ -361,7 +352,7 @@ void addShipping()
 					// check if the quantity is valid (tidak melebihi stok warehouse)
 					if (ship[i].qty <= warehouse[j].stok)
 					{
-						found = 1; // quantity is valid, exit the loop
+						found = 1;
 						break;
 					}
 					else
@@ -404,7 +395,6 @@ void sortAscQty()
 
 void sequentialSearchNamaPembeli()
 {
-	// adinda
 	char nama_pembeli[255];
 	printf("Masukkan Nama Pembeli: ");
 	scanf(" %[^\n]", &nama_pembeli);
@@ -412,7 +402,6 @@ void sequentialSearchNamaPembeli()
 	int found = 0;
 	for (i = 0; i < shippingSize; i++)
 	{
-		// compare nama_pembeli yang dicari dengan setiap data ship[i].nama_pembeli, cari hingga ada yang sama ( == 0)
 		if (strcmp(ship[i].nama_pembeli, nama_pembeli) == 0)
 		{
 			printf("Shipping data untuk %s ditemukan pada index %d: \n", nama_pembeli, i);
@@ -459,7 +448,7 @@ void update()
 		// update berat dan stok
 		if (ship[i].processed == 1)
 			continue;
-		{ // kalau data index sudah pernah diupdate, maka skip
+		{ // kalau data index sudah pernah diproses, maka skip proses ini
 			for (j = 0; j < warehouseSize; j++)
 			{
 				if (ship[i].id_produk == warehouse[j].id_produk)
@@ -471,7 +460,7 @@ void update()
 					// update stok barang pada warehouse
 					int stok = warehouse[j].stok;
 					warehouse[j].stok = stok - qty;
-					// processed = 1 untuk menandai tersebut sudah diupdate
+					// processed = 1 untuk menandai index tersebut sudah diupdate
 					ship[i].processed = 1;
 					ship[i].ongkir = (ship[i].total_berat * 12800) + (ship[i].jarak * 400);
 				}
@@ -490,14 +479,13 @@ int printPenjualan()
 	{
 		if (data[i].id_produk == 0)
 		{
-			continue; // skip this iteration and move on to the next one
+			continue;
 		}
 		printf("| %-2d| %-19s|Rp.%-8d|Rp.%-8d|      %-8d| Rp.%-11d|\n", data[i].id_produk, data[i].nama_produk, data[i].base_price, data[i].sell_price, data[i].jumlah_terjual, data[i].total_profit);
 	}
 	printf("=================================================================================\n");
 }
 
-// varrel
 void sortAscProfit()
 {
 	int i, j;
@@ -517,7 +505,6 @@ void sortAscProfit()
 	}
 }
 
-// varrel
 void sortDescProfit()
 {
 	int i, j;
@@ -528,7 +515,7 @@ void sortDescProfit()
 		{
 			if (data[j].total_profit < data[j + 1].total_profit)
 			{
-				// Swap data data[j] and data[j+1] if needed
+				// Swap data data[j] dan data[j+1]
 				struct data_penjualan temp = data[j];
 				data[j] = data[j + 1];
 				data[j + 1] = temp;
@@ -537,7 +524,6 @@ void sortDescProfit()
 	}
 }
 
-// varrel
 //  Fungsi untuk mengurutkan data penjualan berdasarkan jumlah produk yang terjual (ascending)
 void sortAscJumlahTerjual()
 {
@@ -558,7 +544,6 @@ void sortAscJumlahTerjual()
 	}
 }
 
-// varrel
 void sortDescJumlahTerjual()
 {
 	int i;
@@ -566,7 +551,7 @@ void sortDescJumlahTerjual()
 	int n = penjualanSize;
 	for (i = 0; i < n - 1; i++)
 	{
-		// Find the maximum element in the unsorted array
+		// cari nilai max
 		int max_index = i;
 		for (j = i + 1; j < n; j++)
 		{
@@ -575,14 +560,13 @@ void sortDescJumlahTerjual()
 				max_index = j;
 			}
 		}
-		// Swap the maximum element with the first element of the unsorted array
+		// Swap element max dengan elemen pertama array yang belum urut
 		struct data_penjualan temp = data[i];
 		data[i] = data[max_index];
 		data[max_index] = temp;
 	}
 }
 
-// varrel
 void searchNamaProdukTabel3()
 {
 	// sequential search
@@ -593,16 +577,15 @@ void searchNamaProdukTabel3()
 	int found = 0;
 	for (i = 0; i < penjualanSize; i++)
 	{
-		// compare nama_pembeli yang dicari dengan setiap data ship[i].nama_pembeli, cari hingga ada yang sama ( == 0)
 		if (strcmp(data[i].nama_produk, namaProduk) == 0)
 		{
 			printf("Data Penjualan Nama Produk %s ditemukan pada index %d: \n", namaProduk, i);
 			printf("Id produk: %d\n", data[i].id_produk);
 			printf("Nama produk: %s\n", data[i].nama_produk);
-			printf("Harga Beli: %d\n", data[i].base_price);
-			printf("Harga Jual: %d\n", data[i].sell_price);
+			printf("Harga Beli: Rp.%d\n", data[i].base_price);
+			printf("Harga Jual: Rp.%d\n", data[i].sell_price);
 			printf("Total Terjual: %d\n", data[i].jumlah_terjual);
-			printf("Total Keuntungan: %d\n", data[i].total_profit);
+			printf("Total Keuntungan: Rp.%d\n", data[i].total_profit);
 			found = 1;
 		}
 	}
@@ -623,12 +606,12 @@ int main()
 	warehouse[5] = (struct wh){"Kakao", 6, 1000, 1, 20000, 55000};
 	warehouse[6] = (struct wh){"Kayu Mahoni", 7, 1000, 8, 500000, 650000};
 	warehouse[7] = (struct wh){"Karet", 8, 2000, 1, 18000, 36000};
-	warehouse[8] = (struct wh){"Nikel", 9, 5000, 1, 300000, 412000};
+	warehouse[8] = (struct wh){"Nikel", 9, 890, 1, 300000, 412000};
 	warehouse[9] = (struct wh){"Sabut Kelapa", 10, 1000, 1, 5000, 11000};
 	warehouse[10] = (struct wh){"Barel Minyak Mentah", 11, 20, 136, 1120000, 1372900};
 	warehouse[11] = (struct wh){"Arang Briket", 12, 2500, 1, 6000, 18000};
-	warehouse[12] = (struct wh){"Kayu Jati", 13, 100, 8, 38000, 70000};
-	warehouse[13] = (struct wh){"Sarang Burung Walet", 14, 100, 1, 8000000, 10000000};
+	warehouse[12] = (struct wh){"Kayu Jati", 13, 100, 8, 380000, 520000};
+	warehouse[13] = (struct wh){"Sarang Burung Walet", 14, 100, 1, 8000000, 9200000};
 	warehouse[14] = (struct wh){"Biji Kopi", 15, 2000, 1, 3000, 10000};
 	ship[0] = (struct shipping){"John Smith", "United States", 5000, 1, "Minyak kelapa sawit", 300, 0, 0, 0};
 	ship[1] = (struct shipping){"Jane Doe", "China", 8000, 2, "Minyak kelapa", 500, 0, 0, 0};
@@ -638,17 +621,26 @@ int main()
 	ship[5] = (struct shipping){"Samantha Jones", "United Kingdom", 7000, 6, "Kakao", 200, 0, 0, 0};
 	ship[6] = (struct shipping){"Christopher Davis", "Germany", 9000, 3, "Rempah-rempah", 3600, 0, 0, 0};
 	ship[7] = (struct shipping){"Ashley Johnson", "Russia", 8000, 8, "Karet", 1000, 0, 0};
-	ship[8] = (struct shipping){"Daniel Thompson", "Spain", 7000, 9, "Nikel", 1250, 0, 0, 0};
+	ship[8] = (struct shipping){"Daniel Thompson", "Spain", 7000, 9, "Nikel", 358, 0, 0, 0};
 	ship[9] = (struct shipping){"Sarah Smith", "Brazil", 8000, 10, "Sabut Kelapa", 433, 0, 0, 0};
 	ship[10] = (struct shipping){"Jason Davis", "Australia", 10000, 11, "Barel Minyak Mentah", 10, 0, 0, 0};
 	ship[11] = (struct shipping){"Laura Williams", "South Africa", 9000, 12, "Arang Briket", 120, 0, 0, 0};
-	ship[12] = (struct shipping){"Michael Thompson", "Mexico", 7000, 13, "Kayu Jati", 7, 0, 0, 0};
+	ship[12] = (struct shipping){"Michael Thompson", "Mexico", 7000, 13, "Kayu Jati", 16, 0, 0, 0};
 	ship[13] = (struct shipping){"Emily Johnson", "Canada", 8000, 14, "Sarang Burung Walet", 12, 0, 0, 0};
 	ship[14] = (struct shipping){"John Davis", "Argentina", 9000, 15, "Biji Kopi", 1100, 0, 0, 0};
 	warehouseSize = 15;
 	shippingSize = 15;
 	int i;
-
+	//pembagian lokasi gudang berdasarkan index
+	for (i = 0; i < warehouseSize; i++){
+		if (i < 5){
+		strcpy(warehouse[i].lokasi, "Gudang 1");
+		} else if (i >= 5 && i < 10){
+		strcpy(warehouse[i].lokasi, "Gudang 2");
+		} else if (i >= 10){
+		strcpy(warehouse[i].lokasi, "Gudang 3");	
+		}
+	}
 	// copy data warehouse ke penjualan
 	for (i = 0; i < warehouseSize; i++)
 	{
@@ -658,13 +650,19 @@ int main()
 		data[i].sell_price = warehouse[i].sell_price;
 		penjualanSize++;
 	}
-
+	printf("\t  FINAL PROJECT KELOMPOK 5");
+printf("\n\t  =============================\n");
+printf("\t  Dzaki Yusuf Izzudin (21081010192)\n");
+printf("\t  Dewa Made Kesawa Murti (21081010196)\n");
+printf("\t  Nugraha Varrel Kusuma (21081010198)\n");
+printf("\t  Adinda Putri B.S (21081010201)\n");
+printf("\t  Mutiara Fadhilatuzzahro (21081010205)\n");
 mainmenu:
 	// while(1) untuk infinite loop ke menu
 	while (1)
 	{
 		int pil;
-		printf("\n===  Program Sistem Informasi Pergudangan & Shipping  ===\n\t\t1. Data Warehouse\n\t\t2. Data Shipping\n\t\t3. Data Penjualan\n\n\t\t0. Exit program\n\n Input:");
+		printf("\n===  Program Sistem Informasi Pergudangan & Shipping  ===\n\n\t\t  1. Data Warehouse\n\t\t  2. Data Shipping\n\t\t  3. Data Penjualan\n\n\t\t  0. Exit program\n\n Input:");
 		while (1)
 		{
 			if (scanf("%d", &pil) == 1 && pil >= 0 && pil <= 3)
@@ -681,11 +679,49 @@ mainmenu:
 			int i, j, id;
 			printWarehouse();
 			int menu;
-			printf("\n[1]Search data menggunakan ID produk\n[2]Sort dari produk paling ringan\n[3]Sort dari produk paling berat\n[4]Sort dari jumlah stok paling sedikit\n[5]Sort dari jumlah stok terbanyak\n[6]Search Nama Produk\n[7]Update Stock\n[8]Kembali\n\n\tMasukkan Input: ");
+			printf("\n[1]Update Stock\n[2]Sort dari produk paling ringan\n[3]Sort dari produk terberat\n[4]Sort dari jumlah stok paling sedikit\n[5]Sort dari jumlah stok terbanyak\n[6]Search data Nama Produk\n[7]Search data ID produk\n[8]Kembali\n\n\tMasukkan Input: ");
 			scanf("%d", &menu);
 			switch (menu)
 			{
 			case 1:
+				updateStockWarehouse();
+				system("pause");
+				system("cls");
+				break;
+			case 2:
+				sortAscBerat();
+				printWarehouse();
+				printf("Produk dengan beban satuan paling ringan: %s\n\n", warehouse[0].nama_produk);
+				system("pause");
+				system("cls");
+				break;
+			case 3:
+				sortDescBerat();
+				printWarehouse();
+				printf("Produk dengan beban satuan paling berat: %s\n\n", warehouse[0].nama_produk);
+				system("pause");
+				system("cls");
+				break;
+			case 4:
+				sortAscStok();
+				printWarehouse();
+				printf("Produk dengan jumlah stock paling sedikit: %s\n\n", warehouse[0].nama_produk);
+				system("pause");
+				system("cls");
+				break;
+			case 5:
+				sortDescStok();
+				printWarehouse();
+				printf("Produk dengan jumlah stock paling banyak: %s\n\n", warehouse[0].nama_produk);
+				system("pause");
+				system("cls");
+				break;
+			case 6:
+				searchWarehouseNama();
+				system("pause");
+				system("cls");
+				break;
+			case 7:
 				printf("Search by Product ID = ");
 				scanf("%d", &id);
 				int index = binarySearchIDProduk(id);
@@ -697,45 +733,12 @@ mainmenu:
 					printf("  Stock: %d\n", warehouse[index].stok);
 					printf("  Harga beli: Rp.%d\n", warehouse[index].base_price);
 					printf("  Harga jual: Rp.%d\n", warehouse[index].sell_price);
+					printf("  Lokasi Penyimpanan: %s\n", warehouse[index].lokasi);
 				}
 				else
 				{
 					printf("Warehouse with id %d not found.\n", id);
 				}
-				system("pause");
-				system("cls");
-				break;
-			case 2:
-				sortAscBerat();
-				printWarehouse();
-				system("pause");
-				system("cls");
-				break;
-			case 3:
-				sortDescBerat();
-				printWarehouse();
-				system("pause");
-				system("cls");
-				break;
-			case 4:
-				sortAscStok();
-				printWarehouse();
-				system("pause");
-				system("cls");
-				break;
-			case 5:
-				sortDescStok();
-				printWarehouse();
-				system("pause");
-				system("cls");
-				break;
-			case 6:
-				searchWarehouseNama();
-				system("pause");
-				system("cls");
-				break;
-			case 7:
-				updateStockWarehouse();
 				break;
 			case 8:
 				system("cls");
@@ -765,19 +768,23 @@ mainmenu:
 				break;
 			case 3:
 				sortAscTotalBerat();
+				printf("Pengiriman dengan berat total terkecil: %s, %0.2fkg\n\n", ship[0].nama_pembeli, ship[0].total_berat);
 				system("pause");
 				system("cls");
 				printShipping();
+				printf("Pengiriman dengan berat total terkecil: %s, %0.2fkg\n\n", ship[0].nama_pembeli, ship[0].total_berat);
 				break;
 			case 4:
 				sortDescTotalBerat();
 				system("pause");
 				system("cls");
 				printShipping();
+				printf("Pengiriman dengan berat total terbesar: %s, %0.2f\n\n", ship[0].nama_pembeli, ship[0].total_berat);
 				break;
 			case 5:
 				sortAscQty();
 				printShipping();
+				printf("Pengiriman dengan quantity terkecil: %s, %d\n\n", ship[0].nama_pembeli, ship[0].qty);
 				system("pause");
 				system("cls");
 				break;
@@ -808,24 +815,28 @@ mainmenu:
 			case 1:
 				sortAscProfit();
 				printPenjualan();
+				printf("Produk dengan keuntungan terkecil: %s, dengan total Rp.%d\n\n", data[0].nama_produk, data[0].total_profit);
 				system("pause");
 				system("cls");
 				break;
 			case 2:
 				sortDescProfit();
 				printPenjualan();
+				printf("Produk dengan keuntungan terbesar: %s, dengan total Rp.%d\n\n", data[0].nama_produk, data[0].total_profit);
 				system("pause");
 				system("cls");
 				break;
 			case 3:
 				sortAscJumlahTerjual();
 				printPenjualan();
+				printf("Produk dengan jumlah penjualan paling sedikit: %s, dengan total terjual %d\n\n", data[0].nama_produk, data[0].jumlah_terjual);
 				system("pause");
 				system("cls");
 				break;
 			case 4:
 				sortDescJumlahTerjual();
 				printPenjualan();
+				printf("Produk dengan jumlah penjualan terbanyak: %s, dengan total terjual %d\n\n", data[0].nama_produk, data[0].jumlah_terjual);
 				system("pause");
 				system("cls");
 				break;

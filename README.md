@@ -5,6 +5,14 @@
 ![](https://user-images.githubusercontent.com/90470601/209253314-53a6438f-903f-4e83-8b0b-ef21c3a221a8.jpg)
 ![](https://user-images.githubusercontent.com/90470601/209253581-b6e3e6b4-0700-44af-aa35-07db2b2e6ed4.png)
 
+Nama Anggota Kelompok :
+1. Dzaki Yusuf Izzudin (21081010192)
+2. Dewa Made Kesawa Murti (21081010196)
+3. Nugraha Varrel Kusuma (21081010198)
+4. Adinda Putri B.S (21081010201)
+5. Mutiara Fadhilatuzzahro (21081010205)
+
+
   Sebuah perusahaan ekspor memiliki sistem yang terdiri dari 3 bagian, yaitu warehouse, shipping, dan data penjualan. Warehouse berisi informasi mengenai produk-produk yang tersedia di perusahaan tersebut, termasuk nama produk, ID produk, stok, dan berat produk. Shipping berisi informasi mengenai pembeli yang akan dikirim produk, termasuk nama pembeli, negara tujuan, jarak pengiriman, ID produk, nama produk, jumlah, total berat, dan ongkos kirim. Data penjualan berisi informasi mengenai produk yang terjual, termasuk ID produk, nama produk, harga beli, harga jual, jumlah produk yang terjual, dan total keuntungan.
 
   Perusahaan tersebut memintamu untuk membuat sebuah program yang dapat mengelola data-data tersebut sesuai dengan kebutuhan perusahaan. Program tersebut harus dapat menambah data baru ke warehouse & shipping, sorting, searching, menghitung total berat berdasarkan berat satuan dan quantity, menghitung ongkos kirim dari shipping berdasarkan jarak dan berat cargo, dan menghitung total keuntungan dari data penjualan berdasarkan base price dan sell price dari setiap produk yang terjual. Agar perusahaan dapat mengetahui produk mana yang memiliki performance penjualan tertinggi. Gunakan rumus berikut untuk menghitung data:
@@ -17,3 +25,7 @@
 
   Sebagai contoh, perusahaan tersebut ingin menambah data produk baru ke warehouse. Data produk tersebut berisi informasi mengenai nama produk, ID produk, stok, dan berat produk. Kamu harus menambahkan data tersebut ke dalam struktur data warehouse yang telah dibuat dan mengupdate jumlah data di dalam warehouse sesuai dengan data yang baru ditambahkan.
 
+MATERI
+1. Struct
+2. Sorting
+3. Searching

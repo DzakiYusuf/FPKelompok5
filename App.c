@@ -124,14 +124,40 @@ void sortDescStok()
 	}
 }
 
-int sortAscID()
-{
-	// dodek
+int sortAscID(){
+	int i, j;
+ 	for (i = 0; i < warehouseSize - 1; i++) {
+    	for (j = 0; j < warehouseSize - i - 1; j++) {
+      	if (warehouse[j].id_produk > warehouse[j + 1].id_produk) {
+        // swap elements
+        	struct wh temp = warehouse[j];
+        	warehouse[j] = warehouse[j + 1];
+       		warehouse[j + 1] = temp;
+	  }
+	}
+  }
 }
 
 int binarySearchIDProduk(int id)
 {
-	//
+	sortAscID(warehouse,warehouseSize); //sort id sebelum masuk ke binary search
+	printWarehouse(warehouse,warehouseSize);
+	int left = 0;
+    	int right = warehouseSize - 1;
+    	while (left <= right) {
+    		int middle = left + (right - left) / 2;
+    	if (warehouse[middle].id_produk == id) {
+      	return middle;
+	} 
+	else if (warehouse[middle].id_produk < id) {
+      		left = middle + 1;
+	} 
+	else{
+      		right = middle - 1;
+    }
+  }
+  return -1;
+
 }
 
 void updateStockWarehouse()

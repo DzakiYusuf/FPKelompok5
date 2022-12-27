@@ -42,14 +42,17 @@ int warehouseSize = 0;
 int shippingSize = 0;
 int penjualanSize = 0;
 
-void printWarehouse(){
+void printWarehouse()
+{
 	printf("\n");
 	printf("============================  Data Warehouse  =============================\n");
 	printf("|%-3s|    %-18s|   %-9s| %-6s| %-18s|\n", "ID Produk", "Nama Produk", "Berat", "Qty", "Lokasi Penyimpanan");
 	int i;
-	for (i = 0; i < warehouseSize; i++) {
+	for (i = 0; i < warehouseSize; i++)
+	{
 		printf("|    %-5d|  %-20s|  %-7.2f kg| %-6d|     %-14s|\n", warehouse[i].id_produk, &warehouse[i].nama_produk, warehouse[i].berat, warehouse[i].stok, warehouse[i].lokasi);
-	}	printf("===========================================================================\n");
+	}
+	printf("===========================================================================\n");
 }
 
 void sortAscBerat()
@@ -120,40 +123,47 @@ void sortDescStok()
 	}
 }
 
-int sortAscID(){
+int sortAscID()
+{
 	int i, j;
- 	for (i = 0; i < warehouseSize - 1; i++) {
-    	for (j = 0; j < warehouseSize - i - 1; j++) {
-      	if (warehouse[j].id_produk > warehouse[j + 1].id_produk) {
-        // swap elements
-        	struct wh temp = warehouse[j];
-        	warehouse[j] = warehouse[j + 1];
-       		warehouse[j + 1] = temp;
-	  }
+	for (i = 0; i < warehouseSize - 1; i++)
+	{
+		for (j = 0; j < warehouseSize - i - 1; j++)
+		{
+			if (warehouse[j].id_produk > warehouse[j + 1].id_produk)
+			{
+				// swap elements
+				struct wh temp = warehouse[j];
+				warehouse[j] = warehouse[j + 1];
+				warehouse[j + 1] = temp;
+			}
+		}
 	}
-  }
 }
 
 int binarySearchIDProduk(int id)
 {
-	sortAscID(warehouse,warehouseSize); //sort id sebelum masuk ke binary search
-	printWarehouse(warehouse,warehouseSize);
+	sortAscID(warehouse, warehouseSize); // sort id sebelum masuk ke binary search
+	printWarehouse(warehouse, warehouseSize);
 	int left = 0;
-    	int right = warehouseSize - 1;
-    	while (left <= right) {
-    		int middle = left + (right - left) / 2;
-    	if (warehouse[middle].id_produk == id) {
-      	return middle;
-	} 
-	else if (warehouse[middle].id_produk < id) {
-      		left = middle + 1;
-	} 
-	else{
-      		right = middle - 1;
-    }
-  }
-  return -1;
-
+	int right = warehouseSize - 1;
+	while (left <= right)
+	{
+		int middle = left + (right - left) / 2;
+		if (warehouse[middle].id_produk == id)
+		{
+			return middle;
+		}
+		else if (warehouse[middle].id_produk < id)
+		{
+			left = middle + 1;
+		}
+		else
+		{
+			right = middle - 1;
+		}
+	}
+	return -1;
 }
 
 void updateStockWarehouse()
@@ -225,15 +235,15 @@ void searchWarehouseNama()
 void printShipping()
 {
 	int i;
-	
-		printf("\n");
-		printf("=================================================  Data Shipping  ===================================================\n");
-		printf("| %-20s | %-15s | %-9s| %-2s | %-20s | %-6s| %-10s|%-16s|\n", "Nama Pembeli", "Negara", "Jarak", "ID", "Nama Produk", "Qty", "Berat", "Tarif Pengiriman");
-		for (i = 0; i < shippingSize; i++)
-		{
-			printf("| %-20s | %-15s | %-9.2f| %-2d | %-20s | %-6d| %-7.2f kg| Rp.%-12d|\n", &ship[i].nama_pembeli, &ship[i].negara, ship[i].jarak, ship[i].id_produk, &ship[i].nama_produk, ship[i].qty, ship[i].total_berat, ship[i].ongkir);
-		}
-		printf("=====================================================================================================================\n");
+
+	printf("\n");
+	printf("=================================================  Data Shipping  ===================================================\n");
+	printf("| %-20s | %-15s | %-9s| %-2s | %-20s | %-6s| %-10s|%-16s|\n", "Nama Pembeli", "Negara", "Jarak", "ID", "Nama Produk", "Qty", "Berat", "Tarif Pengiriman");
+	for (i = 0; i < shippingSize; i++)
+	{
+		printf("| %-20s | %-15s | %-9.2f| %-2d | %-20s | %-6d| %-7.2f kg| Rp.%-12d|\n", &ship[i].nama_pembeli, &ship[i].negara, ship[i].jarak, ship[i].id_produk, &ship[i].nama_produk, ship[i].qty, ship[i].total_berat, ship[i].ongkir);
+	}
+	printf("=====================================================================================================================\n");
 }
 
 void sortAscIDTabel2()
@@ -311,7 +321,7 @@ void addShipping()
 				; // clear the input buffer
 		}
 
-		int found = 0; // 
+		int found = 0; //
 
 		while (found != 1)
 		{ // loop untuk mengulang proses hingga id_produk ditemukan
@@ -486,23 +496,76 @@ int printPenjualan()
 	printf("=================================================================================\n");
 }
 
+void merge(int l, int m, int r)
+{
+	int i, j, k;
+	int n1 = m - l + 1;
+	int n2 = r - m;
+
+	// membuat array temp L[n1], R[n2]
+	struct data_penjualan L[n1], R[n2];
+
+	// Copy data ke array temp L[] dan R[]
+	for (i = 0; i < n1; i++)
+		L[i] = data[l + i];
+	for (j = 0; j < n2; j++)
+		R[j] = data[m + 1 + j];
+
+	// Merge temp array kembali ke data[l..r]
+	i = 0; // Inisial index subarray pertama
+	j = 0; // Inisial index subarray kedua
+	k = l; // Inisial index subarray yang sudah merge
+	while (i < n1 && j < n2)
+	{
+		if (L[i].total_profit <= R[j].total_profit)
+		{
+			data[k] = L[i];
+			i++;
+		}
+		else
+		{
+			data[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+
+	/* Copy the remaining elements of L[], if there are any */
+	while (i < n1)
+	{
+		data[k] = L[i];
+		i++;
+		k++;
+	}
+
+	// Copy sisa elemen R[] ke data[], (jika ada)
+	while (j < n2)
+	{
+		data[k] = R[j];
+		j++;
+		k++;
+	}
+}
+
+/* l (left index) dan r (right index) dari sub array data yang akan di sorting */
+void mergeSort(int l, int r)
+{
+	if (l < r)
+	{
+		// mencari nilai m (mid) sama seperti (l+r)/2, untuk menghindari overflow
+		int m = l + (r - l) / 2;
+
+		// Sort bagian pertama dan kedua
+		mergeSort(l, m);
+		mergeSort(m + 1, r);
+
+		merge(l, m, r);
+	}
+}
+
 void sortAscProfit()
 {
-	int i, j;
-	int n = penjualanSize;
-	for (i = 0; i < n - 1; i++)
-	{
-		for (j = 0; j < n - i - 1; j++)
-		{
-			if (data[j].total_profit > data[j + 1].total_profit)
-			{
-				// Swap data data[j] dan data[j+1] jika diperlukan
-				struct data_penjualan temp = data[j];
-				data[j] = data[j + 1];
-				data[j + 1] = temp;
-			}
-		}
-	}
+	mergeSort(0, penjualanSize - 1);
 }
 
 void sortDescProfit()
@@ -631,14 +694,20 @@ int main()
 	warehouseSize = 15;
 	shippingSize = 15;
 	int i;
-	//pembagian lokasi gudang berdasarkan index
-	for (i = 0; i < warehouseSize; i++){
-		if (i < 5){
-		strcpy(warehouse[i].lokasi, "Gudang 1");
-		} else if (i >= 5 && i < 10){
-		strcpy(warehouse[i].lokasi, "Gudang 2");
-		} else if (i >= 10){
-		strcpy(warehouse[i].lokasi, "Gudang 3");	
+	// pembagian lokasi gudang berdasarkan index
+	for (i = 0; i < warehouseSize; i++)
+	{
+		if (i < 5)
+		{
+			strcpy(warehouse[i].lokasi, "Gudang 1");
+		}
+		else if (i >= 5 && i < 10)
+		{
+			strcpy(warehouse[i].lokasi, "Gudang 2");
+		}
+		else if (i >= 10)
+		{
+			strcpy(warehouse[i].lokasi, "Gudang 3");
 		}
 	}
 	// copy data warehouse ke penjualan
@@ -651,12 +720,12 @@ int main()
 		penjualanSize++;
 	}
 	printf("\t  FINAL PROJECT KELOMPOK 5");
-printf("\n\t  =============================\n");
-printf("\t  Dzaki Yusuf Izzudin (21081010192)\n");
-printf("\t  Dewa Made Kesawa Murti (21081010196)\n");
-printf("\t  Nugraha Varrel Kusuma (21081010198)\n");
-printf("\t  Adinda Putri B.S (21081010201)\n");
-printf("\t  Mutiara Fadhilatuzzahro (21081010205)\n");
+	printf("\n\t  =============================\n");
+	printf("\t  Dzaki Yusuf Izzudin (21081010192)\n");
+	printf("\t  Dewa Made Kesawa Murti (21081010196)\n");
+	printf("\t  Nugraha Varrel Kusuma (21081010198)\n");
+	printf("\t  Adinda Putri B.S (21081010201)\n");
+	printf("\t  Mutiara Fadhilatuzzahro (21081010205)\n");
 mainmenu:
 	// while(1) untuk infinite loop ke menu
 	while (1)
